@@ -2,6 +2,8 @@
 
 [![Open in DevPod!](https://devpod.sh/assets/open-in-devpod.svg)](https://devpod.sh/open#https://github.com/dirien/pulumi-exoscale-workshop)
 
+<img src="img/main.png">
+
 ## Welcome, Pulumi and Exoscale Friends! 👋
 
 The goal of this workshop is for you tp learn how to use Pulumi in different scenarios. From running instances and
