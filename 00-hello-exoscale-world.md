@@ -1,4 +1,4 @@
-# Chapter 0 - Hello Exoscale World
+# Chapter 0 - Hello, Exoscale World!
 
 ## Overview
 
