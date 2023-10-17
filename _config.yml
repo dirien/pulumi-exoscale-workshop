@@ -11,3 +11,4 @@ include:
 - 04-argocd-setup.md
 - 05-cluster-teardown.md
 - README.md
+- img/*
