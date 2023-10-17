@@ -6,13 +6,18 @@
 
 ## Welcome, Pulumi and Exoscale Friends! 👋
 
-The goal of this workshop is for you tp learn how to use Pulumi in different scenarios. From running instances and
-managed service to Kubernetes and GitOps. The workshop is split in multiple chapters showing you different aspects of
-Pulumi. As a bonus, you will learn how to use Pulumi with Exoscale.
+The goal of this workshop is for you to learn how to use Pulumi in different scenarios. From running instances and
+managed service to Kubernetes and GitOps. The workshop is split in multiple chapters showing you the different aspects
+of Pulumi. As a bonus, you will learn how to use [Exoscale](https://www.exoscale.com/).
+
+### Repository
+
+You can find the repository for this workshop [here](https://github.com/dirien/pulumi-exoscale-workshop). Please feel
+free to look for the examples in the different chapters if you get stuck.
 
 ### Content
 
-- [Chapter 0 - Hello Exoscale World](./00-hello-exoscale-world.md)
+- [Chapter 0 - Hello, Exoscale World!](./00-hello-exoscale-world.md)
 - [Chapter 1 - Welcome SKS](./01-sks-cluster-setup.md)
 - [Chapter 2 - Containerize an Application](./02-app.md)
 - [Chapter 3 - Deploy the Application to Kubernetes](./03-simple-deploy-app.md)
@@ -46,6 +51,7 @@ or
 If you get stuck during the workshops, you can try the following things in order:
 
 1. You can reach out for me anytime! Happy to help you on track again.
+1. Check the example code [here](https://github.com/dirien/pulumi-exoscale-workshop).
 1. Google the error! Honestly you will learn the most with this way.
 1. Reach out the community in the Pulumi Community Slack. You can join the Slack [here](https://slack.pulumi.com/).
 

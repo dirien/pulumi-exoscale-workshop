@@ -5,4 +5,4 @@ description: A minimal TypeScript Pulumi program
 config:
   registry: "docker.io/dirien"
   username: "dirien"
-  password: "dckr_pat_KSJw3T76aLV3c0gsYP25XpBbUUk"
+  password: "xxx"
