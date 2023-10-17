@@ -1,0 +1,9 @@
+name: 01-sks-cluster-setup
+runtime: nodejs
+description: A minimal TypeScript Pulumi program
+
+config:
+  kubernetesVersion: 1.28.2
+  nodePoolType: standard.medium
+  nodePoolSize: 3
+  zone: at-vie-1

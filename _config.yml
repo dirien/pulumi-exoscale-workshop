@@ -1,0 +1,13 @@
+plugins:
+- jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+- 00-hello-exoscale-world.md
+- 01-sks-cluster-setup.md
+- 02-app.md
+- 03-simple-deploy-app.md
+- 04-argocd-setup.md
+- 05-cluster-teardown.md
+- README.md

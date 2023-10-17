@@ -1,0 +1,3 @@
+name: 00-hello-exoscale-world
+runtime: nodejs
+description: A minimal TypeScript Pulumi program

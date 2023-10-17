@@ -1,0 +1,6 @@
+name: 04-argocd-setup
+runtime: go
+description: A minimal Kubernetes Go Pulumi program
+
+config:
+  infraStackRef: "dirien/01-sks-cluster-setup/dev"

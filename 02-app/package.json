@@ -1,0 +1,11 @@
+{
+    "name": "02-app",
+    "main": "index.ts",
+    "devDependencies": {
+        "@pulumi/docker": "^4.4.3",
+        "@types/node": "^16"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "00-hello-exoscale-world",
+    "main": "index.ts",
+    "devDependencies": {
+        "@pulumiverse/exoscale": "^0.53.0",
+        "@types/node": "^16"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}

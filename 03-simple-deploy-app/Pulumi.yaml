@@ -1,0 +1,7 @@
+name: 03-simple-deploy-app
+runtime: go
+description: A minimal Kubernetes Go Pulumi program
+
+config:
+  infraStackRef: "dirien/01-sks-cluster-setup/dev"
+  appImageRef: "dirien/02-app/dev"
