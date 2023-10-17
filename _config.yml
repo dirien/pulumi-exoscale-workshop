@@ -1,4 +1,11 @@
-markdown: GFM
+title: Pulumi Workshop: Foundations to Advanced
+author: Engin Diri
+
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  
 plugins:
 - jekyll-relative-links
 relative_links:
