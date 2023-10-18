@@ -133,5 +133,4 @@ the cluster up and running for [Chapter 2 - Deploy an Application](./02-deploy-a
 ## Learn More
 
 - [Pulumi](https://www.pulumi.com/)
-- [Scaleway Pulumi Provider](https://www.pulumi.com/registry/packages/scaleway/)
 - [Docker Pulumi Provider](https://www.pulumi.com/registry/packages/docker/)
