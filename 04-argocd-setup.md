@@ -1,17 +1,20 @@
-# Chapter 4 - Enter the World of GitOps
+# Chapter 4 - Enter the World of GitOps!
+
+<img src="img/chap4.png">
 
 ## Overview
 
-In this chapter, we're going to setup Argo CD to deploy a simple application to the Kubernetes cluster. The application
-has a Helm chart. We also will use `StackReference` to reference again, the get the outputs of our infrastructure stack
-and also create programmatically a Kubernetes provider again.
+In this chapter, we'll pave the way for Argo CD, enabling it to deploy a straightforward application to our Kubernetes
+cluster. This application comes equipped with a Helm chart. We'll once again employ `StackReference` to fetch outputs
+from our infrastructure stack and programmatically establish a Kubernetes provider.
 
-New concepts in this chapter:
+**New Concepts Introduced:**
 
-- The usage of the `Release` resource, to deploy a Helm chart.
-- The definition of a `CustomResource` to define a Argo CD `Application`.
+- **`Release` Resource**: This will be used to deploy a Helm chart.
+- **`CustomResource` Definition**: This will be pivotal in defining an Argo CD `Application`.
 
-As programming language, I am going to use Go again, but feel free to use the language you are most comfortable with.
+For this chapter, I'll be continuing with Go as my programming language of choice. However, always opt for the language
+that resonates best with your comfort and proficiency levels.
 
 ## Prerequisites
 
@@ -25,7 +28,6 @@ As programming language, I am going to use Go again, but feel free to use the la
 
 ### Step 1 - Configure the Pulumi CLI with a new template!
 
-> [!NOTE]
 > If you run Pulumi for the first time, you will be asked to log in. Follow the instructions on the screen to
 > login. You may need to create an account first, don't worry it is free.
 
@@ -127,3 +129,9 @@ the Argo CD UI to trigger a sync.
 
 - Can you deploy a second helm chart to the cluster?
 - What happens if you delete a Kubernetes resource from the UI in the `hello-server` namespace?
+
+## Learn More
+
+- [Pulumi](https://www.pulumi.com/)
+- [Kubernetes Pulumi Provider](https://www.pulumi.com/registry/packages/kubernetes/)
+- [Argo CD](https://argoproj.github.io/argo-cd/)

@@ -1,10 +1,12 @@
 # Chapter 0 - Hello, Exoscale World!
 
+<img src="img/chap1.png">
+
 ## Overview
 
-In this chapter, we will create a simple Pulumi program, creating a single Exoscale instance with a simple webserver
-running. The idea is to get familiar with the Pulumi CLI and the Pulumi program structure, create several different
-stacks and overwrite default values.
+In this chapter, we will develop a simple Pulumi program that creates a single Exoscale instance with a basic web server
+running on it. Our goal is to become acquainted with the Pulumi CLI, understand the structure of a Pulumi program, and
+learn how to create multiple stacks and override default values.
 
 ### Modern Infrastructure As Code with Pulumi
 
@@ -75,7 +77,6 @@ You should see something like this:
 
 ### Step 2 - Configure the Pulumi CLI
 
-> [!NOTE] 
 > If you run Pulumi for the first time, you will be asked to log in. Follow the instructions on the screen to
 > login. You may need to create an account first, don't worry it is free.
 
@@ -99,10 +100,9 @@ stack name (dev): dev
 ...
 ```
 
-Now you need to add the Exoscale provider to your project. Depending on the programming language you are using, you need
-to follow different steps. Check
-the [Pulumi Exoscale Provider](https://www.pulumi.com/registry/packages/exoscale/installation-configuration/)
-documentation for more information.
+To integrate the [Exoscale provider](https://www.pulumi.com/registry/packages/exoscale/installation-configuration/) into
+your project, the steps will vary based on the programming language you're
+using. For detailed instructions, refer to the Pulumi Exoscale Provider documentation.
 
 I am using `typescript` for this workshop, so I need to install the Exoscale provider with `npm`.
 
@@ -112,19 +112,20 @@ npm install @pulumiverse/exoscale --save-dev
 
 ### Step 3 - Add a Compute Instance to the Pulumi program
 
-Now we can start to add some resources to our Pulumi program. We will start with a simple compute instance.
+Now, let's begin adding resources to our Pulumi program, starting with a basic compute instance.
 
-Check the [Pulumi Exoscale Provider](https://www.pulumi.com/registry/packages/exoscale/api-docs/compute/) documentation
-or your Intellisense for code completion to see all the available options.
+For a comprehensive list of available options, consult
+the [Pulumi Exoscale Provider](https://www.pulumi.com/registry/packages/exoscale/api-docs/compute/) documentation or
+utilize your Intellisense for code completion.
 
-You can run following exo commands to get more information about the available images and instance types.
+To gather more information about the available images and instance types, execute the following 'exo' commands.
 
 ```bash
 exo compute instance-type list
 exo compute instance-template list
 ```
 
-Please use and Ubuntu 23.04 image and a `standard.medium` instance type.
+Please use and `Ubuntu 23.04` image and a `standard.medium` instance type.
 
 This is the user data, you can use to install a simple webserver on the compute instance.
 
@@ -142,14 +143,12 @@ runcmd:
   - nohup python3 -m http.server 8080 &
 ```
 
-> [!NOTE] 
 > Instance types are written in the format "FAMILY.SIZE" (e.g. standard.small).
 
-If you got stuck, you can have a look at the [solution](./solutions/00-hello-exoscale-world.ts).
+If you got stuck, you can have a look at the [solution](./00-hello-exoscale-world/index.ts).
 
 ### Step 4 - Run Pulumi Up
 
-> [!NOTE] 
 > Before you can run `pulumi up`, you need to set the Exoscale API key and secret as environment
 > variables. `EXOSCALE_API_KEY` and `EXOSCALE_API_SECRET`.
 
@@ -175,7 +174,7 @@ export the public IP of the compute instance.
 export const publicIp = simpleVM.publicIpAddress
 ```
 
-Now you can run `pulumi up` again to see the public IP of the compute instance.
+Run `pulumi up` again to see the public IP of the compute instance.
 
 ```bash
 pulumi up
@@ -185,7 +184,7 @@ Outputs:
   + publicIp: "194.182.187.163"
 ```
 
-Now you can run a simple `curl` command to see if the webserver is running.
+Execute the `curl` command to see if the webserver is running.
 
 ```bash
 curl 194.182.187.163:8080 
@@ -195,7 +194,7 @@ curl: (28) Failed to connect to 194.182.187.163 port 8080 after 75006 ms: Couldn
 Bummer, we can't reach the webserver. Why? Because we didn't open the port 80 in the firewall. Let's fix this in the
 code!
 
-Let's add a security group and securty group rule to the Pulumi program, and attach the security group to the compute
+Add a security group and security group rule to the Pulumi program, and attach the security group to the compute
 instance.
 
 After applying the changes, you should be able to reach the webserver.
@@ -207,14 +206,14 @@ Hello, World from Exoscale!
 
 ### Step 6 - Create a new Stack
 
-As we are very happy with our current stack, it is time to think about deploying our webserver to production. But what
-happens if we want to deploy a different output and in a different zone?
+Now that we're satisfied with our current stack, we should consider deploying our web server to a production
+environment. But what if we wish to deploy with varied outputs or in a different zone?
 
-This is where stacks come into play. Stacks are a way to manage multiple deployments of the same Pulumi program but with
-different configurations. We can set different configuration values for each stack if needed and set default values for
-specific configuration values.
+This is where the concept of 'stacks' becomes invaluable. Stacks allow us to manage multiple deployments of the same
+Pulumi program, each with its unique configurations. This flexibility means we can assign distinct configuration values
+to each stack and even establish default values for specific configurations.
 
-Open the `Pulumi.yaml` file and add the following configuration values.
+To proceed, open the `Pulumi.yaml` file and insert the following configuration values.
 
 ```yaml
 config:
@@ -234,10 +233,10 @@ config:
       - nohup python3 -m http.server 8080 &
 ```
 
-This will be our default configuration values. Now remove the hardcoded values from the Pulumi program and use the new
-configuration values.
+These will serve as our default configuration values. To streamline our Pulumi program, remove the hardcoded values and
+replace them with the newly established configuration values.
 
-Now we can create a new stack with the following command.
+To create a new stack, execute the following command.
 
 ```bash
 pulumi stack init prod
@@ -249,7 +248,7 @@ This will create a new stack called `prod`. You can see all the available stacks
 pulumi stack ls
 ```
 
-Now create a new `Pulumi.prod.yaml` file and add the following configuration values.
+Create a new `Pulumi.prod.yaml` file and add the following configuration values.
 
 ```yaml
 config:
@@ -269,8 +268,9 @@ config:
       - nohup python3 -m http.server 8081 &
 ```
 
-Now you can run `pulumi up` again to deploy the new stack, and after some seconds, you should see the new webserver
-answer.
+Run `pulumi up` again to deploy the new stack. After a brief moment, your new instance will be deployed. When you
+execute
+the `curl` command, you should receive a response from the newly deployed web server.
 
 ```bash
 curl 138.124.210.178:8081
@@ -285,20 +285,42 @@ exo compute instance list
 
 ### Step 7 - Pulumi Cloud Console
 
-You may have noticed that in all the Pulumi output, there is a link to the Pulumi Cloud Console. The Pulumi Cloud
-Console is a web-based interface for managing your Pulumi projects and stacks. You can see all the resources, outputs,
-audit logs and much more.
+You might have observed a link to the Pulumi Cloud Console in the Pulumi output. The Pulumi Cloud Console is a web-based
+interface designed for managing your Pulumi projects and stacks. It provides a comprehensive view of resources, outputs,
+audit logs, and more.
 
-Click on the link and log in with your Pulumi account. Have a look around and see what you can find.
+Click on the provided link and sign in using your Pulumi account. Take a moment to explore and familiarize yourself with
+its features.
 
 ### Step 8 - The new kid in town, Pulumi ESC!
 
-...
+Pulumi ESC (Environments, Secrets, and Configuration) is a cutting-edge solution for managing secrets and configurations
+in modern cloud settings. It simplifies the complexities of configuration, ensuring a "secure by default" approach.
+Pulumi ESC introduces a new paradigm in configuration as code, allowing teams to consolidate secrets and configurations
+into a unified collection termed an 'environment'. This can be utilized across various infrastructure and application
+services. While it seamlessly integrates with Pulumi IaC, Pulumi ESC also offers a standalone CLI and API for broader
+applications.
+
+<img src="img/esc.png">
+
+1. Pulumi ESC enables you to define environments, which contain collections of secrets and configuration. Each
+   environment can be composed from multiple environments.
+
+1. Pulumi ESC supports a variety of configuration and secrets sources, and it has an extensible plugin model that allows
+   third-party sources.
+
+1. Pulumi ESC has a rich API that allows for easy integration. Every value in an environment can be accessed from any
+   target execution environment.
+
+1. Every environment can be locked down with RBAC, versioned, and audited.
+
+For more information, configuration options and example please visit
+the [Pulumi ESC documentation](https://www.pulumi.com/docs/pulumi-cloud/esc/).
 
 Create new Pulumi ESC environment.
 
 ```bash
-pulumi env init dirien/exoscale
+pulumi env init <your-org>/exoscale
 ```
 
 And paste this content:
@@ -326,26 +348,26 @@ values:
     userData: ${webserver.userData}
 ```
 
-Now create a dev environment.
+Set up a development environment.
 
 ```bash
 pulumi env init exoscale-dev
 ```
 
-And paste this content:
+Paste only this content:
 
 ```yaml
 imports:
 - exoscale
 ```
 
-And finally create a prod environment.
+Finally, create a prod environment.
 
 ```bash
 pulumi env init exoscale-prod
 ```
 
-And paste this content:
+With this content:
 
 ```yaml
 imports:
@@ -373,9 +395,9 @@ values:
     userData: ${webserver.userData}
 ```
 
-Now you can remove all the `config` fields from your `Pulumi.*.yaml` files and replace them with the following
+You can now eliminate all the config fields in your Pulumi.*.yaml files and substitute them with the following:
 
-For dev:
+For `dev`:
 
 ```yaml
 environment:
@@ -383,7 +405,7 @@ environment:
   - exoscale-dev
 ```
 
-For prod:
+For `prod`:
 
 ```yaml
 environment:
@@ -391,8 +413,9 @@ environment:
   - exoscale-prod
 ```
 
-Pulumi ESC is a superioir way to manage your configuration values and to share them with your team or between different
-stacks. Of course, the previous `config` way is still supported and you can even mix both ways.
+Pulumi ESC offers an enhanced method for managing configuration values, making it easier to share them with your team or
+across different stacks. While the earlier config approach remains supported, you also have the flexibility to combine
+both methods.
 
 ### Step 9 - Destroy the stack
 
@@ -418,4 +441,6 @@ pulumi stack select <stack-name>
 
 ## Learn more
 
-...
+- [Pulumi](https://www.pulumi.com/)
+- [Pulumi Exoscale Provider](https://www.pulumi.com/registry/packages/exoscale/)
+- [Pulumi ESC](https://www.pulumi.com/docs/pulumi-cloud/esc/)

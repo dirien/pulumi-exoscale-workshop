@@ -1,18 +1,20 @@
 # Chapter 2 - Containerize an Application
 
+<img src="img/chap3.png">
+
 ## Overview
 
-Now that we created a Kubernetes cluster, we can deploy our application to it. In this chapter we will containerize a
-simple node.js application, push it to a container registry.
+Having established our Kubernetes cluster, it's time to deploy our application. In this chapter, we'll embark on the
+journey of containerizing a basic `node.js` application and subsequently pushing it to a container registry.
 
-I will provide the credentials for an external container registry, as Exoscale has currently no native container
-registry! The Pulumi code will create a registry for us, build the image and push it to the registry.
+It's worth noting that Exoscale currently lacks a native container registry. However, fret not! I'll be furnishing you
+with credentials for an external container registry. The Pulumi code we'll delve into not only creates a registry for us
+but also builds the image and ensures it's pushed to the designated registry.
 
 ## Instructions
 
 ### Step 1 - Configure the Pulumi CLI
 
-> [!NOTE] 
 > If you run Pulumi for the first time, you will be asked to log in. Follow the instructions on the screen to
 > login. You may need to create an account first, don't worry it is free.
 
@@ -59,14 +61,15 @@ Please export also the `repoDigest` from your `Image` resource, as we need it la
 
 ### Step 2 - Pulumi Secret Management: Batteries Included!
 
-Now, having a field in our config (and I do not mean Pulumi ESC) that contains a password is always a bad idea. But
-there is a solution for this! Actually two, Pulumi ESC we already know and the other one is the Pulumi secret.
+Storing passwords directly in our config (and I'm not referring to Pulumi ESC here) is a security misstep. Fortunately,
+Pulumi offers solutions to this challenge. While we're already acquainted with Pulumi ESC, there's another robust tool
+at our disposal: Pulumi secrets.
 
-Pulumi's secrets are a great way to store sensitive data in your Pulumi project. They are encrypted and stored and due
-to
-this we can even commit them to our repository. Pulumi will take care of the encryption and decryption.
+Pulumi secrets are an excellent mechanism for safeguarding sensitive data within your Pulumi project. These secrets are
+encrypted and securely stored, allowing us to even commit them to our repository without concerns. Pulumi handles the
+encryption and decryption processes seamlessly.
 
-To add a secret to our project, we can use the Pulumi CLI:
+To integrate a secret into our project using the Pulumi CLI, follow these steps:
 
 ```bash
 pulumi config set --secret password
@@ -119,7 +122,8 @@ the cluster up and running for [Chapter 2 - Deploy an Application](./02-deploy-a
 
 ## Stretch Goals
 
-- Can you change the `FROM` image a `cgr.dev/chainguard/node:latest` image, for enhanced security and smaller image size?
+- Can you change the `FROM` image a `cgr.dev/chainguard/node:latest` image, for enhanced security and smaller image
+  size?
     * Run `docker scout <imageName output from pulumi>/myapp:latest` before the change
     * Hint: You need to change `ENTRYPOINT [ "node", "app.js" ]` to `ENTRYPOINT [ "/usr/bin/node", "/app/app.js" ]`
     * Run `docker scout <imageName output from pulumi>/myapp:latest` after the change and compare the results

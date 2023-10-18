@@ -18,11 +18,11 @@ free to look for the examples in the different chapters if you get stuck.
 ### Content
 
 - [Chapter 0 - Hello, Exoscale World!](./00-hello-exoscale-world.md)
-- [Chapter 1 - Welcome SKS](./01-sks-cluster-setup.md)
+- [Chapter 1 - Welcome, SKS!](./01-sks-cluster-setup.md)
 - [Chapter 2 - Containerize an Application](./02-app.md)
 - [Chapter 3 - Deploy the Application to Kubernetes](./03-simple-deploy-app.md)
-- [Chapter 4 - Enter the World of GitOps](./04-argocd-setup.md)
-- [Chapter 5 - Destroy the Kubernetes Custer](./05-cluster-teardown.md)
+- [Chapter 4 - Enter the World of GitOps!](./04-argocd-setup.md)
+- [Chapter 5 - Housekeeping!](./05-housekeeping.md)
 
 ### Prerequisites
 
@@ -48,15 +48,14 @@ or
 
 ### Troubleshooting Tips
 
-If you get stuck during the workshops, you can try the following things in order:
+If you encounter any challenges during the workshops, consider the following steps in order:
 
-1. You can reach out for me anytime! Happy to help you on track again.
-1. Check the example code [here](https://github.com/dirien/pulumi-exoscale-workshop).
-1. Google the error! Honestly you will learn the most with this way.
-1. Reach out the community in the Pulumi Community Slack. You can join the Slack [here](https://slack.pulumi.com/).
+1. Don't hesitate to reach out to me! I'm always here to assist and get you back on track.
+1. Review the example code available [here](https://github.com/dirien/pulumi-exoscale-workshop).
+1. Search for the error on Google. Honestly, this method often provides the most insightful solutions.
+1. Engage with the Pulumi Community on Slack. If you haven't joined yet, you can do
+   so [here](https://slack.pulumi.com/).
 
 ### Want to know more?
 
 If you enjoyed this workshop, please some of Pulumi's other [learning materials](https://www.pulumi.com/learn/)
-
-[![Deploy](https://get.pulumi.com/new/button.svg)](https://www.pulumi.com/)
