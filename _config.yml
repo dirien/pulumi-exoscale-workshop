@@ -17,6 +17,6 @@ include:
 - 02-app.md
 - 03-simple-deploy-app.md
 - 04-argocd-setup.md
-- 05-cluster-teardown.md
+- 05-housekeeping.md
 - README.md
 - img/*

@@ -2,38 +2,43 @@
 
 ## Overview
 
-In this chapter, you will learn some advanced Pulumi concepts:
+In this chapter, we'll delve into some sophisticated Pulumi techniques:
 
-- [Stack References](https://www.pulumi.com/docs/intro/concepts/stack/#stackreferences) to share outputs between the
-  different stacks.
-- Create programmatically a Kubernetes provider using the `Provider` resource. This is useful if you want to use a
-  different Kubernetes provider than the one you used to create the cluster.
-- Deploy a different Kubernetes resources to the cluster, without the use of YAML files.
+- **Stack References**: Learn how to share outputs between various stacks
+  using [Stack References](https://www.pulumi.com/docs/intro/concepts/stack/#stackreferences).
+
+- **Programmatic Kubernetes Provider Creation**: Familiarize yourself with the `Provider` resource to create a
+  Kubernetes provider programmatically. This is especially handy if you aim to utilize a different Kubernetes provider
+  than the one initially used to establish the cluster.
+
+- **Kubernetes Resource Deployment**: Discover how to deploy diverse Kubernetes resources to your cluster, sidestepping
+  the traditional use of YAML files.
 
 ## Prerequisites
 
 - The Kubernetes cluster from the [previous chapter](/01-sks-cluster-setup.md)
-- The nodejs application from the [previous chapter](/02-app.md)
+- The `node.js` application from the [previous chapter](/02-app.md)
 - Pulumi CLI installed
 - [Go](https://golang.org/doc/install)
 
 ## Instructions
 
-You may have noticed, for this chapter I am going to use a different Pulumi supported language. My choice is Go, but
-feel free to use the language you are most comfortable with.
+You might have observed that for this chapter, I've opted for a different language supported by Pulumi: Go. However, I
+encourage you to choose the language you're most at ease with.
 
-### Step 1 - Configure the Pulumi CLI with a new template!
+### Step 1 - Kickstart with a New Pulumi CLI Template!
 
-> [!NOTE] 
 > If you run Pulumi for the first time, you will be asked to log in. Follow the instructions on the screen to
 > login. You may need to create an account first, don't worry it is free.
 
-To initialize a new Pulumi project, run `pulumi new`. But this time we're going to use a different template. As I am
-going to use Go and do some Kubernetes deployments, I am going to use the `kubernetes-go` template.
+To lay the groundwork for a new Pulumi project, execute the command `pulumi new`. This round, we're venturing beyond the
+usual and opting for a distinct template. Given my inclination towards Go and my intent to roll out some Kubernetes
+deployments, I'm setting my sights on the `kubernetes-go` template.
 
-There are more pre-defined templates from Pulumi available, check out
-the [Pulumi Templates](https://www.pulumi.com/templates/) for more information. You can of course also create your own
-templates and share them with your team or organization.
+Pulumi has plenty of pre-configured templates. For a comprehensive list, visit
+the [Pulumi Templates](https://www.pulumi.com/templates/) page. And here's the exciting part: you're not confined to
+these templates. Feel free to craft your bespoke templates and share the innovation with your team or broader
+organization.
 
 ```bash
 pulumi new kubernetes-go
@@ -52,17 +57,18 @@ stack name (dev): dev
 ...
 ```
 
-This template is going to use the standard Kubernetes provider from Pulumi pointing to your current Kubernetes context.
-But as we created in the previous chapter a Kubernetes cluster, we want to use this the kubeconfig file from this. To do
-this we can now programmatically create a Kubernetes provider using the `Provider` resource.
+The chosen template will default to Pulumi's standard Kubernetes provider, which aligns with your current Kubernetes
+context. However, recalling our previous chapter, we crafted a Kubernetes cluster. Naturally, we'd want to utilize
+the `kubeconfig` file from that endeavor. To achieve this, we can programmatically establish a Kubernetes provider with
+the aid of the `Provider` resource.
 
-For this we need to retrieve the kubeconfig output from the `01-sks-cluster-setup` stack. We can do this by
-using `StackReference`s.
+Our first task is to fetch the `kubeconfig` output from the `01-sks-cluster-setup` stack. This can be seamlessly
+accomplished through `StackReference`s.
 
-Here is the documentation for the [StackReference](https://www.pulumi.com/docs/concepts/stack/#stackreferences),
-so you can see the implementation for your programming language.
+For a deeper understanding and implementation details tailored to your programming language, refer to
+the [StackReference documentation](https://www.pulumi.com/docs/concepts/stack/#stackreferences).
 
-This is my implementation in Go:
+Now, let's delve into my Go-based implementation:
 
 ```go
 package main
@@ -96,7 +102,6 @@ pulumi config set infraStackRef
 pulumi config set appImageRef
 ```
 
-> [!NOTE] 
 > Stack references always in the format `<organization>/<project>/<stack>`.
 
 Pulumi will ask you now to create a new stack. You can name the stack whatever you want. If you run Pulumi with the

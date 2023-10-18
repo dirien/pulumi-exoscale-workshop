@@ -1,6 +1,9 @@
-# Chapter 5 - Destroy the Kubernetes Custer
+# Chapter 5: Housekeeping!
 
-In this chapter we will destroy our Kubernetes Cluster we created during the workshop.
+<img src="img/chap5.png">
+
+In this chapter, we'll undertake some cleanup. We will delete all resources we set up during the
+workshop.
 
 ### Prerequisites
 
@@ -48,4 +51,6 @@ pulumi destroy -y -f
 
 ### Step 2 - Now Celebrate, You're Done!
 
-![](https://cdn.dribbble.com/users/234969/screenshots/5414177/burst_trophy_dribbble.gif)
+<p align="center">
+  <img src="https://cdn.dribbble.com/users/234969/screenshots/5414177/burst_trophy_dribbble.gif">
+</p>

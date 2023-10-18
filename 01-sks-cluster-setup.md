@@ -1,19 +1,19 @@
-# Chapter 1 - Welcome SKS!
+# Chapter 1 - Welcome, SKS!
+
+<img src="img/chap2.png">
 
 ## Overview
 
-In this chapter, we are going to create a Scalable Kubernetes Service (or SKS) cluster as base for our other workshops
-chapters.
+In this chapter, we'll set up a Scalable Kubernetes Service (SKS) cluster, which will serve as the foundation for our
+subsequent workshop chapters.
 
-I am going to use `typescript` for this chapter, but feel free to use the language you are most comfortable with.
+While I'll be using `typescript` for this chapter, please choose the language you're most at ease with.
 
 ## Instructions
 
 ### Step 1 - Configure the Exoscale CLI
 
-> [!NOTE] 
-> If you already did this in the
-> previous [chapter](./00-hello-exoscale-world.md#step-1---configure-the-exoscale-cli), you can skip this step.
+> If you already did this in the previous [chapter](./00-hello-exoscale-world.md#step-1---configure-the-exoscale-cli), you can skip this step.
 
 Run `exo config` and enter the provided API key, secret key, account name and the default zone (`at-vie-1`). Your
 prompt should look similar to this:
@@ -52,7 +52,6 @@ You should see something like this:
 
 ### Step 2 - Configure the Pulumi CLI
 
-> [!NOTE] 
 > If you run Pulumi for the first time, you will be asked to log in. Follow the instructions on the screen to
 > login. You may need to create an account first, don't worry it is free.
 
@@ -76,10 +75,9 @@ stack name (dev): dev
 ...
 ```
 
-Now you need to add the Exoscale provider to your project. Depending on the programming language you are using, you need
-to follow different steps. Check
-the [Pulumi Exoscale Provider](https://www.pulumi.com/registry/packages/exoscale/installation-configuration/)
-documentation for more information.
+To integrate the [Exoscale provider](https://www.pulumi.com/registry/packages/exoscale/installation-configuration/) into
+your project, the steps will vary based on the programming language you're
+using. For detailed instructions, refer to the Pulumi Exoscale Provider documentation.
 
 I am using `typescript` for this workshop, so I need to install the Exoscale provider with `npm`.
 
@@ -87,28 +85,32 @@ I am using `typescript` for this workshop, so I need to install the Exoscale pro
 npm install @pulumiverse/exoscale --save-dev
 ```
 
-Try to use `config` values from the start for following properties:
+Use `config` values right from the outset for the following properties:
 
 - `kubernetesVersion`
 - `nodePoolType`
 - `nodePoolSize`
 - `zone`
 
-Similar we learned in the previous chapter!
+Remember the techniques we discussed in the previous chapter!
 
-Use the latest version of Kubernetes, to get exact version run `exo compute sks versions` and use the latest version
+Ensure you're using the latest version of Kubernetes. To determine the exact version, execute the
+command `exo compute sks` versions and select the most recent version.
 
-There is one thing you need to know about SKS cluster, you need to create `SecurityGroup` and `SecurityGroupRule` and
-add them to the `SKSNodepool` and there is a special `SKSKubeconfig` resource!
+Before diving into the SKS cluster, there's a crucial detail you should be aware of: the necessity to create both a
+`SecurityGroup` and `SecurityGroupRule`. These must be incorporated into the `SKSNodepool`. Additionally, there's a
+unique
+resource called `SKSKubeconfig`.
 
-Add `SecurityGroupRule` for following ports [protocol: startPort:endPort]:
+For the `SecurityGroupRule`, ensure you account for the following ports [protocol: startPort:endPort]:
 
-- TCP: 10250:10250
-- TCP: 30000:32767
-- UDP: 30000:32767
-- UDP: 4789:4789
+* TCP: 10250:10250
+* TCP: 30000:32767
+* UDP: 30000:32767
+* UDP: 4789:4789
 
-Finally `export` the `kubeconfig` from the `SKSKubeconfig` resource, we need it later to connect to the cluster.
+To wrap things up, export the `kubeconfig` from the SKSKubeconfig resource. We'll require this later to establish a
+connection to the cluster.
 
 ### Step 3 - Configure Kubectl
 
@@ -137,23 +139,35 @@ pool-49829-xxdaz   Ready    <none>   61m   v1.28.2
 pool-49829-zkwnc   Ready    <none>   61m   v1.28.2
 ```
 
-### Step 5 - Make a Component Resource out of it!
+### Step 5 - Understanding the Need for Component Resources!
 
-First of all, destroy the stack with `pulumi destroy -s dev` and delete the stack with `pulumi stack rm dev`. We are
-going to recreate the stack with but this time using a component resource for it.
+First, let's clean up by destroying the current stack:
 
-As you may have noticed, getting a SKS cluster configured with all the necessary resources is a bit cumbersome and not
-error-prone. You need to know a lot, and when every
+```
+pulumi destroy -s dev
+```
 
-Component resource are a logical grouping of resources. Components usually instantiate a set of related resources in
-their constructor and aggregate them as children. This creates a nice and useful abstraction, by hiding the
-implementation details.
+Then, delete the stack using:
 
-Check the [Pulumi Component Resource](https://www.pulumi.com/docs/concepts/resources/components/) for the implementation
+```
+pulumi stack rm dev
+```
 
-I created a reference implementation for you, you can find in `sks.ts`. Feel free to use it as a reference.
+We'll recreate the stack, but this time we'll utilize a component resource.
 
-Now you can deploy the stack with this new component resource.
+If you've observed, setting up an SKS cluster with all its requisite resources can be a tad intricate and isn't immune
+to errors. The process demands a deep understanding, and every detail matters.
+
+Component resources offer a solution. They serve as logical groupings of resources. Typically, components instantiate a
+related set of resources in their constructor, treating them as children. This abstraction conceals the nitty-gritty,
+ensuring a smoother experience.
+
+For a deep dive, refer to the [Pulumi Component Resource](https://www.pulumi.com/docs/concepts/resources/components/)
+documentation.
+
+I've prepared a reference implementation for you in `sks.ts`. Use it as a guide or starting point.
+
+With the new component resource in place, you're all set to deploy the stack.
 
 ```bash
 pulumi up
@@ -164,16 +178,23 @@ up and running for [Chapter 1 - Containerize an Application](./01-app-setup.md)
 
 ## Stretch Goals
 
-- Can you create a second node pool with a different node type? Add this node pool to the existing cluster.
-- Can you make the CNI configurable? Exoscale offers two different CNI, `calico` and `cilium`. For cilium, you need to
-  enable make this changes:
-  > If using Cilium as CNI plugin, you need to open:
-  > - 8472 UDP with the security group as a source for VXLAN communication between nodes
-  > - 4240 TCP with the security group as a source for network connectivity health API (health-checks)
-  > - PING (ICMP type 8 & code 0) with the security group as a source for health checks
+- Are you looking to diversify your cluster? Consider adding a second node pool with a distinct node type to the
+  existing cluster.
+- Exoscale provides two distinct CNI options: `calico` and `cilium`. Would you like to make the CNI configurable? If
+  you're leaning towards `cilium`, there are specific changes you'll need to implement:
+
+  > **Cilium Configuration Notes:**
+  > - Open port `8472 UDP` with the security group as the source. This facilitates VXLAN communication between nodes.
+  > - Open port `4240 TCP` with the security group as the source. This is essential for the network connectivity health
+      API (health-checks).
+  > - Enable PING (ICMP type 8 & code 0) with the security group as the source, crucial for health checks.
   >
-  > See for more detail: https://community.exoscale.com/documentation/sks/quick-start/#creating-a-cluster-from-the-cli   
+  > For a more comprehensive guide, refer to the Exoscale community
+  documentation: [Creating a Cluster from the CLI](https://community.exoscale.com/documentation/sks/quick-start/#creating-a-cluster-from-the-cli).
 
 ## Learn More
 
-...
+- [Pulumi](https://www.pulumi.com/)
+- [Exoscale SKS](https://community.exoscale.com/documentation/sks/)
+- [Pulumi Component Resources](https://www.pulumi.com/docs/concepts/resources/components/)
+- [Pulumi Exoscale Provider](https://www.pulumi.com/registry/packages/exoscale/installation-configuration/)
