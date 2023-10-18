@@ -145,7 +145,7 @@ runcmd:
 
 > Instance types are written in the format "FAMILY.SIZE" (e.g. standard.small).
 
-If you got stuck, you can have a look at the [solution](./00-hello-exoscale-world/index.ts).
+If you got stuck, you can have a look at the [solution](./solutions/00-hello-exoscale-world/index.ts).
 
 ### Step 4 - Run Pulumi Up
 
