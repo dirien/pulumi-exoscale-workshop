@@ -46,6 +46,25 @@ using [VSCode](https://code.visualstudio.com/docs/devcontainers/containers), [Gi
 or
 [DevPods](https://devpod.sh).
 
+### Install DevPod and the Exosacle DevPod provider
+
+<img src="img/devpod_exoscale.png">
+
+The best results you will get if you use [DevPods](https://devpod.sh) to run this workshop. After the installation go
+ahead and install the [Exoscale DevPod provider](https://github.com/dirien/devpod-provider-exoscale)
+
+Click on `Providers` -> `Add` -> `Custom` and enter `dirien/devpod-provider-exoscale` into the `Source` field. Click on
+
+<img src="img/devpod_add_provider.png">
+
+Click on `Continue` to enter the provider configuration. Enter your Exoscale API key and secret key. Keep the rest as
+it.
+
+Now you can add a new workspace by clicking on `Workspaces` -> `+ Create` and
+enter `github.com/dirien/pulumi-exoscale-workshop` in the `Enter Workspace Source and click `Create Workspace`.
+
+<img src="img/devpod_add_workspace.png">
+
 ### Troubleshooting Tips
 
 If you encounter any challenges during the workshops, consider the following steps in order:
