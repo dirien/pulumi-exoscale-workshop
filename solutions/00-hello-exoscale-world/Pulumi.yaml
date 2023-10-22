@@ -1,3 +1,17 @@
 name: 00-hello-exoscale-world
 runtime: nodejs
 description: A minimal TypeScript Pulumi program
+
+config:
+  userData: |
+    #cloud-config
+    package_update: true
+    packages:
+    - python3
+    write_files:
+    - path: /home/ubuntu/index.html
+      content: |
+        Hello, World from Exoscale!
+    runcmd:
+    - cd /home/ubuntu
+    - nohup python3 -m http.server 8080 &
