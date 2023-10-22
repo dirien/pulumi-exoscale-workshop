@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "gomod"
-    directory: "/04-idp"
+    directory: "/solutions/03-simple-deploy-app"
     schedule:
       interval: "daily"
     labels:
@@ -10,16 +10,7 @@ updates:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "gomod"
-    directory: "/02-deploy-app"
-    schedule:
-      interval: "daily"
-    labels:
-      - "dependencies"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-  - package-ecosystem: "gomod"
-    directory: "/03-fluxcd-setup"
+    directory: "/solutions/04-argocd-setup"
     schedule:
       interval: "daily"
     labels:
@@ -28,7 +19,7 @@ updates:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "npm"
-    directory: "/00-cluster-setup"
+    directory: "/solutions/00-hello-exoscale-world"
     schedule:
       interval: "daily"
     labels:
@@ -37,11 +28,20 @@ updates:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "npm"
-    directory: "/01-app"
+    directory: "/solutions/01-sks-cluster-setup"
     schedule:
       interval: "daily"
     labels:
       - "dependencies"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+  - package-ecosystem: "npm"
+    directory: "/solutions/02-app"
+    schedule:
+      interval: "daily"
+    labels:
+    - "dependencies"
     commit-message:
       prefix: "chore"
       include: "scope"
