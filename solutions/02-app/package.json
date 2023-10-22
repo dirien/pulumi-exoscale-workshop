@@ -3,7 +3,7 @@
     "main": "index.ts",
     "devDependencies": {
         "@pulumi/docker": "^4.4.4",
-        "@types/node": "^16"
+        "@types/node": "^20"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
