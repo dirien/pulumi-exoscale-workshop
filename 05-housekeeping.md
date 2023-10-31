@@ -35,17 +35,10 @@ cd 02-app
 pulumi destroy -y -f
 ```
 
-Getting slowly there in our purge spree. Now we can destroy the Container Registry, we created in the second chapter:
+Getting slowly there in our purge spree. Now we can destroy the infrastructure stack in the `00-cluster-setup` folder:
 
 ```bash
 cd 01-sks-cluster-setup
-pulumi destroy -y -f
-```
-
-And finally we can destroy the infrastructure stack in the `00-cluster-setup` folder:
-
-```bash
-cd 00-cluster-setup[00-hello-exoscale-world](00-hello-exoscale-world)
 pulumi destroy -y -f
 ```
 
