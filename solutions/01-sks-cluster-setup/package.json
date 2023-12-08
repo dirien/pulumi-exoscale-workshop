@@ -2,7 +2,7 @@
     "name": "02-sks-cluster-setup",
     "main": "index.ts",
     "devDependencies": {
-        "@pulumiverse/exoscale": "^0.54.0",
+        "@pulumiverse/exoscale": "^0.54.1",
         "@types/node": "^20"
     },
     "dependencies": {
