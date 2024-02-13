@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 pulumi/pulumi:3.104.2
+FROM --platform=linux/amd64 pulumi/pulumi:3.105.0
 
 RUN <<EOF
 apt install -y bash-completion vim
