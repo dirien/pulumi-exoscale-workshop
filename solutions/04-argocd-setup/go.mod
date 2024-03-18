@@ -6,7 +6,7 @@ toolchain go1.21.3
 
 require (
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.9.1
-	github.com/pulumi/pulumi/sdk/v3 v3.110.0
+	github.com/pulumi/pulumi/sdk/v3 v3.111.1
 )
 
 require (
