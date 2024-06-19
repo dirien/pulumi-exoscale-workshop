@@ -6,6 +6,6 @@
         "@types/node": "^20"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^3.116.1"
+        "@pulumi/pulumi": "^3.120.0"
     }
 }
